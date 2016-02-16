@@ -1,3 +1,5 @@
+# Github #
+
 * We were shown the basic workflow on how programmers work in the IT work place.
 * Projects are in a constant motion of change (upgrade/downgrade) while people are working on a project.
 * There should be a clear line of communication between team members on when people should pull there works.

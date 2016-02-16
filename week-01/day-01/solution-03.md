@@ -1,3 +1,5 @@
+# Terminal #
+
 * The command line is an essential tool to masterfully navigate though and manipulate the contents of your Mac.
 * The skill of using the command line helps you not to rely so much on user interface and makes you appreciate the use of Unix systems.
 * The actual programs we run may be compared to sentences.
