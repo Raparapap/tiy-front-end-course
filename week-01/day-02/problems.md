@@ -82,6 +82,8 @@ Problem 14
 
 Find the address of a web page with an explanation for what is displayed on this image: https://imgs.xkcd.com/comics/debugger.png
 
+* http://xkcd.com/about/
+
 Problem 15
 
 When the domain name artemij.com expires?
