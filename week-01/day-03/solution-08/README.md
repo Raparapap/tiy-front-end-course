@@ -21,7 +21,7 @@
             <tr>
               <td> 8 </td>
               <td> 9 </td>
-            </td> 
+            </tr> 
          </table>
      </td>
   
