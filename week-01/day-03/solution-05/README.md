@@ -1,8 +1,3 @@
-<html>
-<head>
-  <title> Table </title>
-</head>
-<body>
   <table> 
     <thead>
        <tr>
@@ -68,5 +63,3 @@
     </tbody>
         
   </table>
-</body>
-</html>
