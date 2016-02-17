@@ -1,0 +1,31 @@
+<table border> 
+    
+    <tr>
+     <td colspan="4"> 1 </td>
+    </tr>
+    
+    <tr>
+      <td rowspan="3"> 2 </td>
+      <td>
+          <table border>
+            <tr> 
+              <td> 3 </td>
+              <td> 4 </td>
+            </tr>
+            
+            <tr>
+              <td> 6 </td>
+              <td> 7 </td>
+            </tr>
+            
+            <tr>
+              <td> 8 </td>
+              <td> 9 </td>
+            </td> 
+         </table>
+     </td>
+  
+  <td> 5 </td>
+             
+  
+  </table> 
