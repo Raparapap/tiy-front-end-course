@@ -1,0 +1,1 @@
+<iframe> - represents a nested browsing context, effectively embedding another HTML page into the current page. It is used when nesting 3rd party APIs like google maps, youtube videos, etc. 
