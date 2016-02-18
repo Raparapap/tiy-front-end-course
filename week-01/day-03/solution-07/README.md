@@ -17,8 +17,6 @@
               <td> 7 </td>
               <td> 8 </td>
             </tr>
-            
-        </table>
         
       <td> 6 </td>
       
