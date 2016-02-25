@@ -63,19 +63,29 @@
 			'b' with the value of 1
 			'c' with the value of an empty object.
 
-		var a {a='welcome, b=1, c=''};
+		var a {a:'welcome', b=1, c={} };
 
 6.  Create a function that returns an empty object.
 
-			function returnSomething (empty) {
-				return empty - empty;
+			function returnSomething () {
+				var emptyObject = {};
+				return emptyObject;
 			}
 
 7. Create a function that takes two parameters, puts them into a new array and returns that array
 			
-			function addToArray (newItems) {
-				newArray = [newItems + newArray];
-				result newArray;
+			function addToArray (newItem1, newItem2) {
+				var newArray = [];
+				newArray[0] = newItem1
+				newArray[1] = newItem2
+				return newArray;
 			}
 
+			funtion addToArray (newItem1, newItem2) {
+				var newArray = [newItem1, newItem2];
+				return;
+			}
 
+			funtion addToArray (newItem1, newItem2) {
+				return [newItem1, newItem2];
+			}
