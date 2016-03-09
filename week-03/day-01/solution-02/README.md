@@ -20,3 +20,5 @@ function validateParameter(parameter) {
       return "false";
     }
 }
+
+console.log(validateParameter());
