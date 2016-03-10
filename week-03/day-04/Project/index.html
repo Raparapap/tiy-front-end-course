@@ -22,9 +22,9 @@
 	}
 
 	.first-thumbnail {
-		width: 80%;
+		/*width: 80%;
 		border-color: red;
-		border-style: solid;
+		border-style: solid; */
 		
 	}
 
@@ -49,6 +49,10 @@
 	.small-thumbnails {
 		display: flex;
 		flex-direction: row;
+	}
+
+	.backtodefault {
+
 	}
 
 </style>
@@ -108,10 +112,14 @@ function slideShowFunction() {
          }
    mainPhotoElement.setAttribute('src', images[iterator]);
 
-   	for (counter = 0; iterator < thumbnailElements.length; counter = counter + 1) {
-   		thumbnailElements[iterator - 1].setAttribute('class', 'thumbnail')
-   		thumbnailElements[iterator].setAttribute('class', 'highlighted')
-   		thumbnailElements[iterator + 1].setAttribute('class', 'thumbnail')
+   	for (counter = 0; counter < thumbnailElements.length; counter = counter + 1) {
+
+   		if(counter === thumbnailElements.length) {
+   		counter = 0;
+   		}
+   		thumbnailElements[counter].setAttribute('class', 'highlighted')
+   		thumbnailElements[counter - 1].setAttribute('class', 'thumbnail')
+   		
    	}
 
    
