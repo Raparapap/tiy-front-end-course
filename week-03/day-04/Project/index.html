@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Slideshow</title>
+
+
+<style type="text/css">
+
+	* {
+		text-align: center;
+		background-color: gray;
+	}
+
+	.main-photo {
+		width: 50%;
+	}
+
+	.thumbnail {
+		width: 80%;
+		border-color: yellow;
+		border-style: solid;
+	}
+
+	.first-thumbnail {
+		width: 80%;
+		border-color: red;
+		border-style: solid;
+		
+	}
+
+	.second-thumbnail {
+		
+	}
+
+	.third-thumbnail {
+		
+	}
+
+	.fourth-thumbnail {
+		
+	}
+
+	.highlighted {
+		width: 80%;
+		border-color: red;
+		border-style: solid;
+	}
+
+	.small-thumbnails {
+		display: flex;
+		flex-direction: row;
+	}
+
+</style>
+</head>
+<body>
+
+<section>
+<div>
+	<img src="images/image-01.jpg" class = "main-photo"">
+ </div>
+ </section>
+
+ <section>
+ 	<div class = "small-thumbnails">
+ 		<div>
+ 			<img src="images/image-01.jpg" class="thumbnail first-thumbnail">
+ 		</div>
+
+ 		<div>
+ 			<img src="images/image-02.jpg" class="thumbnail second-thumbnail">
+ 		</div>
+
+ 		<div>
+ 			<img src="images/image-03.jpg" class="thumbnail third-thumbnail">
+ 		</div>
+ 			
+ 		<div>
+ 			<img src="images/image-04.jpg" class="thumbnail fourth-thumbnail">
+ 		</div>
+ 	</div>
+ </section>
+
+<script type="text/javascript">
+ 
+  var images = [ 
+  'images/image-01.jpg',
+  'images/image-02.jpg',
+  'images/image-03.jpg',
+  'images/image-04.jpg'
+];
+
+var thumbnailElements = document.getElementsByClassName('thumbnail');
+  
+var mainPhotoElement = document.getElementsByClassName('main-photo')[0];
+
+var slideShow = setInterval(slideShowFunction, 2000);
+  
+var iterator = 0; 
+var counter = 0;
+
+function slideShowFunction() {
+  
+   iterator = iterator + 1;
+
+         if (iterator === images.length) {
+             iterator = 0;
+         }
+   mainPhotoElement.setAttribute('src', images[iterator]);
+
+   	for (counter = 0; iterator < thumbnailElements.length; counter = counter + 1) {
+   		thumbnailElements[iterator - 1].setAttribute('class', 'thumbnail')
+   		thumbnailElements[iterator].setAttribute('class', 'highlighted')
+   		thumbnailElements[iterator + 1].setAttribute('class', 'thumbnail')
+   	}
+
+   
+
+}
+
+</script>
+
+</body>
+</html>
