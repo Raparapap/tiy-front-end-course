@@ -1,0 +1,46 @@
+.calendar {
+	width: 100%;
+	background-color: orange;
+	text-align: center;
+
+}
+
+.month {
+	background-color: red;
+	border-style: solid;
+	border-color: white;
+	overflow: hidden;
+
+}
+
+.dayLine {
+	display: flex;
+	flex-direction: row;
+
+}
+
+.dayBox {
+	width: 13%;
+	text-align: center;
+}
+
+.numberLines {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: brown;
+}
+
+.boxes {
+	width: 13%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-color: white;
+	border-style: solid;
+}
+
+.highlighted {
+	width: 13%;
+	border-color: red;
+	border-style: solid;
+}
+
