@@ -1,12 +1,17 @@
+body {
+	background-color: #20b9c5;
+}
+
+
 .calendar {
 	width: 100%;
-	background-color: orange;
+	background-color: #aaaaaa;
 	text-align: center;
 
 }
 
 .month {
-	background-color: red;
+	background-color: #dddddd;
 	border-style: solid;
 	border-color: white;
 	overflow: hidden;
@@ -16,6 +21,7 @@
 .dayLine {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-around;
 
 }
 
@@ -27,7 +33,8 @@
 .numberLines {
 	display: flex;
 	flex-wrap: wrap;
-	background-color: brown;
+	justify-content: space-around;
+	background-color: #cccccc;
 }
 
 .boxes {
@@ -40,6 +47,8 @@
 
 .highlighted {
 	width: 13%;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	border-color: red;
 	border-style: solid;
 }
