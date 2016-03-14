@@ -1,0 +1,55 @@
+body {
+	background-color: #20b9c5;
+}
+
+
+.calendar {
+	width: 100%;
+	background-color: #aaaaaa;
+	text-align: center;
+
+}
+
+.month {
+	background-color: #dddddd;
+	border-style: solid;
+	border-color: white;
+	overflow: hidden;
+
+}
+
+.dayLine {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+
+}
+
+.dayBox {
+	width: 13%;
+	text-align: center;
+}
+
+.numberLines {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	background-color: #cccccc;
+}
+
+.boxes {
+	width: 13%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-color: white;
+	border-style: solid;
+}
+
+.highlighted {
+	width: 13%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-color: red;
+	border-style: solid;
+}
+
