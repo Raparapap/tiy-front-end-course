@@ -61,7 +61,7 @@
 
 <section>
 <div>
-	<img src="images/image-01.jpg" class = "main-photo"">
+	<img src="images/image-01.jpg" class = "main-photo"/>
  </div>
  </section>
 
@@ -94,14 +94,13 @@
   'images/image-04.jpg'
 ];
 
-var thumbnailElements = document.getElementsByClassName('thumbnail');
+
   
 var mainPhotoElement = document.getElementsByClassName('main-photo')[0];
 
 var slideShow = setInterval(slideShowFunction, 2000);
   
 var iterator = 0; 
-var counter = 0;
 
 function slideShowFunction() {
   
@@ -112,20 +111,7 @@ function slideShowFunction() {
          }
    mainPhotoElement.setAttribute('src', images[iterator]);
 
-   	for (counter = 0; counter < thumbnailElements.length; counter = counter + 1) {
-
-   		if(counter === thumbnailElements.length) {
-   		counter = 0;
-   		}
-   		
-   		thumbnailElements[counter].setAttribute('class', 'highlighted')
-   		thumbnailElements[counter - 1].setAttribute('class', 'thumbnail')
-
-
    	
-   	}
-
-   
 
 }
 
