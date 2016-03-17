@@ -11,8 +11,23 @@
 		background-color: gray;
 	}
 
+	.main-photo-wrapper{
+		display: flex;
+		justify-content: space-between;
+
+	}
+
+	.left-button{
+		height: 50px;
+	}
+
+	.right-button{
+		height: 50px;
+	}
+
 	.main-photo {
 		width: 50%;
+		height: 50%;
 	}
 
 	.thumbnail {
@@ -60,8 +75,10 @@
 <body>
 
 <section>
-<div>
+<div class="main-photo-wrapper">
+	<button class="left-button"> Left </button>
 	<img src="images/image-01.jpg" class = "main-photo"/>
+	<button class="right-button"> Right </button>
  </div>
  </section>
 
@@ -98,19 +115,7 @@
   
 var mainPhotoElement = document.getElementsByClassName('main-photo')[0];
 
-var slideShow = setInterval(slideShowFunction, 2000);
-  
-var iterator = 0; 
-
-function slideShowFunction() {
-  
-   iterator = iterator + 1;
-
-         if (iterator === images.length) {
-             iterator = 0;
-         }
-   mainPhotoElement.setAttribute('src', images[iterator]);
-
+var buttonElement = document.getElementsByClassName()
    	
 
 }
