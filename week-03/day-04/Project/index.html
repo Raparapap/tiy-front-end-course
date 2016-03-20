@@ -105,20 +105,53 @@
 <script type="text/javascript">
  
   var images = [ 
-  'images/image-01.jpg',
-  'images/image-02.jpg',
-  'images/image-03.jpg',
-  'images/image-04.jpg'
+  './images/image-01.jpg',
+  './images/image-02.jpg',
+  './images/image-03.jpg',
+  './images/image-04.jpg'
 ];
 
 
   
 var mainPhotoElement = document.getElementsByClassName('main-photo')[0];
+var leftButtonElement = document.querySelector('.left-button');
+var rightButtonElement = document.querySelector('.right-button');
+var iterator = 0;
+var thumbnailElements = document.querySelectorAll('.thumbnail');
 
-var buttonElement = document.getElementsByClassName()
-   	
 
+function changeThePictureRight() {
+		iterator = iterator + 1;
+		if (iterator === images.length) {
+			iterator = 0
+		}
+
+	mainPhotoElement.setAttribute('src', images[iterator]);
+	thumbnailElements[iterator].setAttribute('class', 'highlighted');
+
+	
+	
 }
+
+function changeThePictureLeft() {
+		iterator = iterator - 1;
+		if (iterator === - 1) {
+			iterator = images.length -1
+		}	
+		mainPhotoElement.setAttribute('src', images[iterator]);
+		thumbnailElements[iterator].setAttribute('class', 'highlighted')
+		
+}
+
+
+leftButtonElement.addEventListener('click', function() {
+	changeThePictureLeft();
+}, false);
+
+rightButtonElement.addEventListener('click', function() {
+	changeThePictureRight();
+}, false);
+
 
 </script>
 

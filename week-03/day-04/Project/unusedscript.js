@@ -12,9 +12,7 @@ function slideShowFunction() {
    mainPhotoElement.setAttribute('src', images[iterator]);
 
 
-
-
-
+}
 
 
 
