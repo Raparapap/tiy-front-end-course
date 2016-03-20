@@ -85,7 +85,7 @@
  <section>
  	<div class = "small-thumbnails">
  		<div>
- 			<img src="images/image-01.jpg" class="thumbnail first-thumbnail">
+ 			<img src="images/image-01.jpg" class="thumbnail first-thumbnail highlighted">
  		</div>
 
  		<div>
@@ -128,8 +128,7 @@ function changeThePictureRight() {
 
 	mainPhotoElement.setAttribute('src', images[iterator]);
 	thumbnailElements[iterator].setAttribute('class', 'highlighted');
-
-	
+	thumbnailElements[iterator - 1].setAttribute('class', 'thumbnail');
 	
 }
 
@@ -140,7 +139,8 @@ function changeThePictureLeft() {
 		}	
 		mainPhotoElement.setAttribute('src', images[iterator]);
 		thumbnailElements[iterator].setAttribute('class', 'highlighted')
-		
+		thumbnailElements[iterator + 1].setAttribute('class', 'thumbnail')
+
 }
 
 
