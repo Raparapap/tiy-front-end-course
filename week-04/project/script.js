@@ -8,44 +8,21 @@ window.onload = function myCalendar() {
 	calendarElement.appendChild(monthBanner);
 	monthBanner.innerHTML = "<h1> March 2016</h1>";
 
-					var dayDiv = document.createElement('div');
-					dayDiv.setAttribute('class', 'dayLine');
-					calendarElement.appendChild(dayDiv);
+	var dayDiv = document.createElement('div');
+	dayDiv.setAttribute('class', 'dayLine');
+	calendarElement.appendChild(dayDiv);
 
-					var mondayBox = document.createElement('div');
-					mondayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(mondayBox);
-					mondayBox.innerHTML = "<h2> Monday </h2>";
 
-					var tuesdayBox = document.createElement('div');
-					tuesdayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(tuesdayBox);
-					tuesdayBox.innerHTML = "<h2> Tuesday </h2>";
 
-					var wednesdayBox = document.createElement('div');
-					wednesdayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(wednesdayBox);
-					wednesdayBox.innerHTML = "<h2> Wednesday </h2>";
 
-					var thursdayBox = document.createElement('div');
-					thursdayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(thursdayBox);
-					thursdayBox.innerHTML = "<h2> Thursday </h2>";
+	for(var iterator = 0; iterator < 7; iterator++) {
+		var dayNamesOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+	    var dayNameBox = document.createElement('div');
+	    dayNameBox.setAttribute('class', 'dayBox');
+	    dayDiv.appendChild(dayNameBox);
+	    dayNameBox.innerHTML = dayNamesOfTheWeek[iterator];
 
-					var fridayBox = document.createElement('div');
-					fridayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(fridayBox);
-					fridayBox.innerHTML = "<h2> Friday </h2>";
-
-					var saturdayBox = document.createElement('div');
-					saturdayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(saturdayBox);
-					saturdayBox.innerHTML = "<h2> Saturday </h2>";
-
-					var sundayBox = document.createElement('div');
-					sundayBox.setAttribute('class', 'dayBox')
-					dayDiv.appendChild(sundayBox);
-					sundayBox.innerHTML = "<h2> Sunday </h2>";
+	}
 
 								var numBoxes = document.createElement('div');
 								numBoxes.setAttribute('class', 'numberLines');
