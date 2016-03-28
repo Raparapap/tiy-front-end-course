@@ -88,15 +88,17 @@ window.onload = function myCalendar() {
 		textAreaElement.setAttribute('rows', '20');
 		textAreaElement.setAttribute('cols', '50');
 
-		//
+		//sets attribute to clicked target
 		(clickEvent.target).setAttribute('class', 'clicked');
 
+		//removes event listener while the modal window is up. 
 		numBoxes.removeEventListener('click', modalWindowPopup, false);
 
 
 	}
 
 	console.log(numBoxes);
+
 	//adding event listener to the calendar
 	numBoxes.addEventListener("click", modalWindowPopup, false);
 
