@@ -56,3 +56,14 @@ body {
 	border-style: solid;
 }
 
+.clicked {
+	width: 13%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: red;
+}
+
+
+.modalWindow {
+
+}

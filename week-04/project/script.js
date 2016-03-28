@@ -62,9 +62,45 @@ window.onload = function myCalendar() {
 	}
 
 	//adding the modal window function
-	function modalWindowPopup(){
-		document.createElement
+	function modalWindowPopup(clickEvent){
+
+
+
+		//layout for modalWindow
+		var modalWindowDiv = document.createElement('div');
+		var formElement = document.createElement('form');
+		modalWindowDiv.appendChild(formElement);
+		var textAreaElement = document.createElement('textarea');
+		formElement.appendChild(textAreaElement);
+		var textAreaTextElement = document.createTextNode('Write notes here.');
+		textAreaElement.appendChild(textAreaTextElement);
+		var buttonElement = document.createElement('button');
+		formElement.appendChild(buttonElement);
+		var buttonElementTextElement = document.createTextNode('Finshed');
+		buttonElement.appendChild(buttonElementTextElement);
+		document.querySelector('body').appendChild(modalWindowDiv);
+
+
+		//setting attributes for the elements
+
+		modalWindowDiv.setAttribute('class', 'modalWindow')
+
+		textAreaElement.setAttribute('rows', '20');
+		textAreaElement.setAttribute('cols', '50');
+
+		//
+		(clickEvent.target).setAttribute('class', 'clicked');
+
+		numBoxes.removeEventListener('click', modalWindowPopup, false);
+
+
 	}
+
+	console.log(numBoxes);
+	//adding event listener to the calendar
+	numBoxes.addEventListener("click", modalWindowPopup, false);
+
+
 }
 
 
