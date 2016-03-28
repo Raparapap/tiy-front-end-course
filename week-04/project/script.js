@@ -5,23 +5,25 @@ window.onload = function myCalendar() {
 	document.body.appendChild(calendarElement);
 
 	var monthBanner = document.createElement('div');
+	var monthBannerTextElement = document.createTextNode('March 2016')
 	monthBanner.setAttribute('class', 'month');
+	monthBanner.appendChild(monthBannerTextElement);
 	calendarElement.appendChild(monthBanner);
-	monthBanner.innerHTML = "<h1> March 2016</h1>";
 
+
+	//creates the names of the week line and puts names in it.
 	var dayDiv = document.createElement('div');
 	dayDiv.setAttribute('class', 'dayLine');
 	calendarElement.appendChild(dayDiv);
 
-
-
-	//creates the names of the week line and puts names in it.
+	
 	for(var iterator = 0; iterator < 7; iterator++) {
 		var dayNamesOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 	    var dayNameBox = document.createElement('div');
+	    var dayNameTextElement = document.createTextNode(dayNamesOfTheWeek[iterator]);
 	    dayNameBox.setAttribute('class', 'dayBox');
+	    dayNameBox.appendChild(dayNameTextElement);
 	    dayDiv.appendChild(dayNameBox);
-	    dayNameBox.innerHTML = dayNamesOfTheWeek[iterator];
 	}
 
 
@@ -40,7 +42,10 @@ window.onload = function myCalendar() {
 
 
 	for(var z = 1; z < 32; z++) {
-	    document.getElementsByClassName('boxes')[z].innerHTML = '<p>' + z + '</p>';
+	    var boxElement = document.getElementsByClassName('boxes')[z];
+	    var boxElementTextNode = document.createTextNode(z);
+	    boxElement.appendChild(boxElementTextNode);
+
 	}
 
 
@@ -54,6 +59,11 @@ window.onload = function myCalendar() {
 		if (document.getElementsByClassName('boxes')[x].textContent === value){
         document.getElementsByClassName('boxes')[x].setAttribute('class', 'highlighted');
 		}
+	}
+
+	//adding the modal window function
+	function modalWindowPopup(){
+		document.createElement
 	}
 }
 

@@ -14,8 +14,9 @@ body {
 	background-color: #dddddd;
 	border-style: solid;
 	border-color: white;
-	overflow: hidden;
-
+	overflow: hidden
+	font-weight: bold;
+	font-size: 50px;
 }
 
 .dayLine {
