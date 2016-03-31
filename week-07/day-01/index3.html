@@ -1,0 +1,113 @@
+/* REFACTORING */
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Google Map</title>
+<!-- Bootstrap - http://getbootstrap.com/getting-started/CDN-->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<style>
+h1 {
+	margin: 50px, 0;
+}
+	#map {
+		width: 100%;
+		height: 700px;
+	}
+</style>
+</head>
+
+<body>
+<h1> Create your Markets </h1>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-6"> 
+	
+			<form>
+			  <div class="form-group">
+			    <label for="latitudeInput">Latitude</label>
+			    <input type="number" class="form-control" id="latitudeInput" placeholder="Latitude" data-js-latitude-input >
+			  </div>
+
+			   <div class="form-group">
+			    <label for="longitudeInput">Longitud</label>
+			    <input type="number" class="form-control" id="longitudeInput" placeholder="Longitude" data-js-longitude-input>
+			   </div>
+			  
+			  <button type="submit" class="btn btn-default">Submit</button>
+			</form>
+	
+	</div>
+	
+	<div class="col-xs-12 col-md-6"> 
+		<div id="map"></div>
+	</div>
+	</div>
+</div>
+		<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+
+    <script>
+    var markers = [];
+    var map;
+
+		function initMap() {
+	  	var myLatLng = {lat: 40.000, lng: 0.000};
+	  	map = new google.maps.Map(document.getElementById('map'), {
+		    zoom: 4,
+		    center: myLatLng
+		 	});
+	  }
+
+	  function removeMarkerFromModel(lat, lng) {
+	  	for (var iterator = 0; markers.length < iterator; iterator++) {
+	  		if (markers[iterator].latLng.lat() === lat && markers[iterator].latLng.lng() === lng ) {
+	  			markers.splice(iterator, 1);  			
+	  		}
+	  	}
+	  }
+
+	  function getMarkerFromModel(lat, lng) {
+	  	for (var iterator = 0; markers.length > iterator; iterator++) {
+	  		if (markers[iterator].position.lat() === lat && markers[iterator].position.lng() === lng ) {
+	  			return markers[iterator];
+	  		} 
+	  	}
+	  	return null;
+	  }
+
+    function createMarker(latitude, longitude, map) { 	  
+    	var marker = new google.maps.Marker({
+		    position: {
+		    	lat: latitude,
+		    	lng: longitude
+		    },
+	    	map: map
+  	  });
+  	  return marker;
+    }
+
+    function removeMarkerFromView() {
+     	getMarkerFromModel(lat, lng).setMap(null);
+    }
+
+	$('button').on('click', function handleButtonClick(event){
+	  event.preventDefault();
+		var latitude = $('[data-js-latitude-input]').val();
+		var longitude = $('[data-js-longitude-input]').val();
+		var marker = createMarker(parseFloat(latitude), parseFloat(longitude), map);
+  	marker.addListener('click', function(event) {
+  		var lat = event.latLng.lat();
+  		var lng = event.latLng.lng();
+    	removeMarkerFromModel(lat, lng);
+    	removeMarkerFromView();
+  	});
+  	markers.push(marker);
+	});
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEYaCyrCs-RqQfBbAK_qTH_KxbaiZ0nd8&callback=initMap"
+    async defer>
+    </script>
+</body>
+</html>

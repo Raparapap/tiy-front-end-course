@@ -68,6 +68,24 @@
 
 	      }
 
+	      function removeMarkerFromModel(lat, lng){
+	      	for(var iterator = 0; iterator < markers.length; iterator++){
+	      		if(markers[iterator].position.lat() === lat && markers[iterator].position.lng() === lng){
+	      			markers.splice(iterator, 1);
+	      		}
+	      	}
+	      	return markers;
+	      }
+
+	      function getMarkerFromModel(lat, lng){
+	      	for(var iterator = 0; iterator < markers.length; iterator++){
+	      		if(markers[iterator].position.lat() === lat && markers[iterator].position.lng() === lng){
+	      			return markers[iterator];
+	      		}
+	      	}
+	      	return null
+	      }
+
 	      $('button').on('click', function(event) {
 	      		event.preventDefault();
 	      		var latitude = $('[data-js-latitude-input]').val();
@@ -81,9 +99,17 @@
 	          	},
 	          	map: map,
         	});
-	      	marker.addListener("dblclick", function() {
-   			 marker.setMap(null);
+
+	      	marker.addListener("click", function(event) {
+	      		var lat = event.latLng.lat();
+	      		var lng = event.latLng.lng()
+
+   			 removeMarkerFromModel(lat, lng);
+
+   			 getMarkerFromModel(lat,lng).setMap(null);
+
 			});
+
 	      	markers.push(marker);
 	      	console.log(markers);
 	      });

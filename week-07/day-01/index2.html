@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Google Map</title>
+<!-- Bootstrap - http://getbootstrap.com/getting-started/CDN-->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<style>
+
+	.headingMarker {
+		text-align: center;
+		font-size: 20px;
+	}
+
+	.buttonSubmit {
+
+	}
+
+	.popUp{
+		color: red;
+		display: flex;
+		flex-direction: column;
+		margin: 10px;
+		background-color: yellow
+	}
+
+	#map {
+		width: 100%;
+		height: 700px;
+	}
+</style>
+</head>
+
+<body>
+
+<div class="row">
+	<div class="col-xs-12 col-md-6 headingMarker">
+			<h1> Create your Markers </h1>
+	</div>
+</div>
+
+<div class="fluid-container">
+	<div class="row">
+		<div class="col-xs-12 col-md-6"> 
+			<div class="formSide">
+				<form>
+				  <div class="form-group">
+				    <label for="latitudeInput">Latitude</label>
+				    <input type="number" class="form-control" id="latitudeInput" placeholder="Latitude" data-js-latitude-input >
+				  </div>
+
+				   <div class="form-group">
+				    <label for="longitudeInput">Longitude</label>
+				    <input type="number" class="form-control" id="longitudeInput" placeholder="Longitude" data-js-longitude-input>
+				   </div>
+
+				   <div class="form-group">
+				    <label for="descriptionInput">Description</label>
+				    <input type="text" class="form-control" id="descriptionInput" placeholder="Please put description for place" data-js-description-input>
+				   </div>
+				  
+				  <button type="submit" class="btn btn-default buttonSubmit">Submit</button>
+				</form>
+			</div>
+	</div>
+	
+	<div class="col-xs-12 col-md-6"> 
+		<div id="map"></div>
+	</div>
+	</div>
+</div>
+		<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+
+    <script>
+    var markers = [];
+    var map;
+		function initMap() {
+	  	var myLatLng = {lat: 14.599512, lng: 120.984219};
+	  	map = new google.maps.Map(document.getElementById('map'), {
+		    zoom: 4,
+		    center: myLatLng
+		 	});
+
+		  // var marker = new google.maps.Marker({
+		  //   position: myLatLng,
+		  //   map: map,
+		  //   title: 'Hello World!'
+		  // });
+	  }
+
+	  function removeMarkerFromModel(lat, lng) {
+	  	for (var iterator = 0; markers.length < iterator; iterator++) {
+	  		if (markers[iterator].latLng.lat() === lat && markers[iterator].latLng.lng() === lng ) {
+	  			markers.splice(iterator, 1);  			
+	  		}
+	  	}
+	  }
+
+	  function getMarkerFromModel(lat, lng) {
+	  	for (var iterator = 0; markers.length > iterator; iterator++) {
+	  		if (markers[iterator].position.lat() === lat && markers[iterator].position.lng() === lng ) {
+	  			return markers[iterator];
+	  		} 
+	  	}
+	  	return null;
+	  }
+
+	  function popUpInfoBox(lat, lng, desc) {
+
+	  	var leftSideDiv = document.querySelector('.formSide')
+	  	var popUpInfoBoxWrapper = document.createElement('div');
+	  	leftSideDiv.appendChild(popUpInfoBoxWrapper);
+	  	popUpInfoBoxWrapper.setAttribute('class','popUp');
+
+	  	// attaching child elements to parent div
+	  	var popUpInfoLatDiv = document.createElement('div');
+	  	popUpInfoBoxWrapper.appendChild(popUpInfoLatDiv);
+	  	var popUpInfoLngDiv = document.createElement('div');
+	  	popUpInfoBoxWrapper.appendChild(popUpInfoLngDiv);
+	  	var popUpInfoDescDiv = document.createElement('div');
+	  	popUpInfoBoxWrapper.appendChild(popUpInfoDescDiv);
+	  	var popUpInfoButton = document.createElement('button');
+	  	popUpInfoBoxWrapper.appendChild(popUpInfoButton);
+
+
+	  	popUpInfoButton.setAttribute('type','submit');
+	  	popUpInfoButton.setAttribute('class','btn btn-default buttonSubmit buttonPopUpInfoBox');
+
+
+	  	// attaching text elements to their divs
+	  	var popUpInfoLatTextElement = document.createTextNode('Latitude =' + ' ' +lat);
+	  	popUpInfoLatDiv.appendChild(popUpInfoLatTextElement);
+	  	var popUpInfoLngTextElement = document.createTextNode('Longitude =' + ' ' +lng);
+	  	popUpInfoLngDiv.appendChild(popUpInfoLngTextElement);
+	  	var popUpInfoDescTextElement = document.createTextNode('Description =' + ' ' +desc);
+	  	popUpInfoDescDiv.appendChild(popUpInfoDescTextElement);
+	  	var popUpInfoButtonTextElement = document.createTextNode('delete');
+	  	popUpInfoButton.appendChild(popUpInfoButtonTextElement);
+
+
+	  }
+
+
+	$('button').on('click', function handleClickEventonButton(event){
+
+		console.log(latitude,longitude,description)
+	 	 event.preventDefault();
+
+		var latitude = $('[data-js-latitude-input]').val();
+		var longitude = $('[data-js-longitude-input]').val();
+		var description = $('[data-js-description-input]').val();
+
+	 	 console.log(latitude,longitude,description);
+
+	  	popUpInfoBox(latitude,longitude,description);
+
+	  var marker = new google.maps.Marker({
+	    position: {
+	    	lat: parseFloat(latitude),
+	    	lng: parseFloat(longitude)
+	    },
+    	map: map
+  	});
+
+	 $('.buttonPopUpInfoBox').on('click', function handleClickEventOnPopUp(event) {
+	 	event.preventDefault();
+	 	$('.popUp').empty()
+
+	 })
+
+  	marker.addListener('dblclick', function handleClickEventonMarker(event) {
+  		var lat = event.latLng.lat();
+  		var lng = event.latLng.lng();
+    	removeMarkerFromModel(lat, lng);
+    	getMarkerFromModel(lat, lng).setMap(null);
+    	//console.log(event);
+  	});
+
+
+  	markers.push(marker);
+  	console.log(markers); 
+	});
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEYaCyrCs-RqQfBbAK_qTH_KxbaiZ0nd8&callback=initMap"
+    async defer>
+    </script>
+</body>
+</html>
