@@ -31,13 +31,10 @@
 	}
 </style>
 			<!-- Handlebars template -->
-			<!-- <script id="entry-template" type="text/x-handlebars-template">
-					  <div class="entry">
-					    <h1>{{title}}</h1>
-					    <div class="body">
-					      {{body}}
-					    </div>
-					  </div>
+			<!-- <script id="box-template" type="text/x-handlebars-template">
+					  <div data-box-id="{{boxID}}" class="panel panel-default infor-panel">
+					  	<div class="panel heading">
+					  		<h3 class="panel-title"> <
 			</script> -->
 
 </head>
@@ -52,7 +49,7 @@
 
 <div class="fluid-container">
 	<div class="row">
-		<div class="col-xs-12 col-md-6"> 
+		<div class="col-xs-12 col-md-6" data-js-box-container> 
 			<div class="formSide">
 				<form>
 				  <div class="form-group">
@@ -72,7 +69,7 @@
 				  
 				  <button type="submit" class="btn btn-default buttonSubmit" id='submitInfo'>Submit</button>
 				</form>
-			</div>
+		 </div>
 	</div>
 	
 	<div class="col-xs-12 col-md-6"> 
@@ -85,6 +82,7 @@
 
     <script>
     var markers = [];
+
     var map;
 		function initMap() {
 	  	var myLatLng = {lat: 14.599512, lng: 120.984219};
@@ -121,6 +119,38 @@
 	  function generateIdForMarker(lat,lng){
 	  	return lat.toString() + lng.toString();
 	  }
+
+	  function removeMarkerFromMap(lat,lng) {
+		getMarkerFromModel(lat, lng).setMap(null);
+	  }
+
+	  function removePopUpInfoBox(boxId) {
+	  	$('[data-box-id= "' + boxId + '"]').remove();	
+	  }
+
+	  function createMarker(latitude, longitude, map) {
+		var marker = new google.maps.Marker({
+		    position: {
+		    	lat: parseFloat(latitude),
+		    	lng: parseFloat(longitude)
+		    },
+	    	map: map
+	  	});
+	  	return marker;
+	  }
+
+
+  	marker.addListener('dblclick', function handleClickEventOnMarkerInMap(event) {
+  		var lat = event.latLng.lat();
+  		var lng = event.latLng.lng();
+  		generateIdForMarker(lat,lng)
+    	removeMarkerFromModel(lat, lng);
+    	removeMarkerFromMap(lat,lng);
+    	removePopUpInfoBox(boxId);
+
+    	return marker;
+    	
+  	});
 
 
 	  function popUpInfoBox(lat, lng, desc) {
@@ -159,15 +189,20 @@
 
 	  }
 
-	var $createMarkerButton = $('[id=submitInfo');
 
-	$createMarkerButton.on('click', function handleClickEventOnCreateMarker(event){
+	  $('[data-js-box-container').on('click', function handleRemoveMarkerButtonClick(event){
+	  	removeMarkerFromModel(lat, lng); //needs fixing, where are you getting lat and lng
+    	removeMarkerFromMap(lat,lng);
+    	removePopUpInfoBox(boxId);
+	  });
 
-		console.log(latitude,longitude,description)
 
-		
-	 	
+		var $createMarkerButton = $('[id=submitInfo');
+
+		$createMarkerButton.on('click', function handleClickEventOnCreateMarker(event){
+		 	
 	 	 event.preventDefault();
+
 
 		var latitude = $('[data-js-latitude-input]').val();
 		var longitude = $('[data-js-longitude-input]').val();
@@ -175,38 +210,43 @@
 
 	 	 console.log(latitude,longitude,description);
 
+	 	 if(!latitude || !longitude || !description) {
+	 	 	return;
+	 	 }
+
 	  	popUpInfoBox(latitude,longitude,description);
 
 	  	generateIdForMarker(latitude,longitude);
 
-	  	var marker = new google.maps.Marker({
-	    position: {
-	    	lat: parseFloat(latitude),
-	    	lng: parseFloat(longitude)
-	    },
-    	map: map
-  	});
+	  
 
 
+	// var boxId = generateIdForMarker(latitude, longitude)
+	// var source   = $("#box-template").html();
+	// var template = Handlebars.compile(source);
+	// var context = {
+	// 	boxId: boxId;
+	// };
+	// var html = template(context);
+	// $('form').after(html);
 
-	 $('.buttonPopUpInfoBox').on('click', function handleClickEventOnPopUp(event) {
-	 	event.preventDefault();
-	 	$()
 
-	 })
+	var marker = createMarker(latitude, longitude, map)
 
-  	marker.addListener('dblclick', function handleClickEventOnMarkerInMap(event) {
-  		var lat = event.latLng.lat();
-  		var lng = event.latLng.lng();
-    	removeMarkerFromModel(lat, lng);
-    	getMarkerFromModel(lat, lng).setMap(null);
-    	//console.log(event);
-  	});
+	var markerData = {
+		id: generateIdForMarker(latitude, longitude),
+		latitude: latitude,
+		longitude: longitude,
+		marker: marker
 
+	};
 
   	markers.push(marker);
-  	console.log(markers); 
+  
+
 	});
+
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEYaCyrCs-RqQfBbAK_qTH_KxbaiZ0nd8&callback=initMap"
     async defer>
