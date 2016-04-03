@@ -1,99 +1,160 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>My basic map app.</title>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width">
+	  <title>My basic map app.</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	  <!-- Bootstrap -->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <style>
-    div #map {
-    	height: 400px;
-    
-  
-    }
-    </style>
-</head>
-<body>
-
-	<div class="container-fluid">
-		<div class="row">
-
-			<!-- Left side of page -->
-			<div class="col-xs-12 col-md-6">
-				<form>	
-				  <div class="form-group">
-				    <label for="latitudeInput">Latitude</label>
-				    <input type="number" class="form-control" id="latitudeInput" placeholder="Latitude" data-js-latitude-input>
-				   </div>
-
-				    <div class="form-group">
-				     <label for="longitudeInput">Longitude</label>
-				    <input type="number" class="form-control" id="longitudeInput" placeholder="Longitude" data-js-longitude-input>
-				    </div>
-				  
-				 	 <button type="submit" class="btn btn-default">Create Marker</button>
-				</form>
-			 </div>
+	  <!-- CSS styling -->
+	  <link rel="stylesheet" type="text/css" href="style.css">
 
 
-			 <!-- Map side of page -->
-			<div class="col-xs-12 col-md-6">  
+	  
+	</head>
+	<body>
 
-				<div id="map"> </div>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Left side of page -->
+				<div class="col-xs-12 col-md-6">
+					<div class="headingMarker"><h1>Create your marker</h1> </div>
+					<form>	
+					  <div class="form-group">
+					    <label for="latitudeInput">Latitude</label>
+					    <input type="number" class="form-control" id="latitudeInput" placeholder="Latitude" data-js-latitude-input required>
+					   </div>
+
+					    <div class="form-group">
+					     <label for="longitudeInput">Longitude</label>
+					    <input type="number" class="form-control" id="longitudeInput" placeholder="Longitude" data-js-longitude-input required>
+					    </div>
+					  
+					    <div class="form-group">
+					     <label for="descriptionInput">Description</label>
+					    <textarea class="form-control" rows="3" id="descriptionInput" placeholder="Description" data-js-description-input required></textarea>
+					    </div>
+
+					    <label for="ratingInput">Rating</label>
+					    <select class="form-control" id="ratingInput" data-js-rating-input required>					
+					      <option selected> Please Rate from 1-10 </option>
+						  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						  <option>4</option>
+						  <option>5</option>
+						  <option>6</option>
+						  <option>7</option>
+						  <option>8</option>
+						  <option>9</option>
+						  <option>10</option>
+						</select>
+						<br>
+						<div>
+					 	 <button type="submit" class="btn btn-default">Create Marker</button>
+					 	</div>
+					</form>
+				 </div>
 
 
+				 <!-- Map side of page -->
+				<div class="col-xs-12 col-md-6">  
+
+					<div class="map" data-js-map> </div>
+					<div id="slider-range-max"></div>
+
+				</div>
 			</div>
 		</div>
-	</div>
 
-	  <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
-	  <script>
-	  	var map;
-	  	var markers = []
-	  	var position = {lat: 14.599512, lng: 120.984219};
-
-	      function initMap() {
-	        map = new google.maps.Map(document.getElementById('map'), {
-	          center:  position,
-	          zoom: 8
-	        });
-
-	        var marker = new google.maps.Marker({
-	          	position: position,
-	          	map: map,
-	          	title: 'Hello World!'
-        	});
-
-	      }
-
-	      $('button').on('click', function(event) {
-	      		event.preventDefault();
-	      		var latitude = $('[data-js-latitude-input]').val();
-	      		
-	      		var longitude = $('[data-js-longitude-input]').val();
-	      	
-	      		var marker = new google.maps.Marker({
-	          	position: {
-	          		lat: parseFloat(latitude),
-	          		lng: parseFloat(longitude)
-	          	},
-	          	map: map,
-        	});
-	      	marker.addListener("dblclick", function() {
-   			 marker.setMap(null);
-			});
-	      	markers.push(marker);
-	      	console.log(markers);
-	      });
-
-	
-	  </script>
-
-	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJn2vaCYXkEMmo6CF7zlv05aHeYJfwLuM&callback=initMap"
-	    async defer>  </script>
+			<!-- Jquery CDN -->
+		  <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
 
 
-</body>
-</html>
+			  <!-- Slider Widget -->
+		  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		  
+
+
+
+		  <!-- Maps and Markers scripts -->
+		  <script>
+		  	var map;
+		  	var markers = []
+		  	var position = {lat: 14.599512, lng: 120.984219};
+
+		      function initMap() {
+		        map = new google.maps.Map(document.querySelector('[data-js-map]'), {
+		          center:  position,
+		          zoom: 2
+		        });
+		      }
+
+		      function removeMarker(marker){
+		      	marker.setMap(null);
+		      }
+
+		      function createMarkerForTheMap(map,latitude,longitude) {
+		      	var marker = new google.maps.Marker({
+		          	position: {
+		          		lat: parseFloat(latitude), // or Number(latitude)
+		          		lng: parseFloat(longitude) // or Number(longitude)
+		          	},
+		          	map: map,
+	        	});
+
+	        	marker.addListener('click', function handleClickForMarker(){
+		      	removeMarker(marker);
+		     	 })
+		      }
+
+		      function addMarkerToModel(marker) {
+		      	markers.push(marker);
+		      }
+
+		      $('form').on('submit', function handleSubmitEvent(submitEvent) {
+		      		submitEvent.preventDefault();
+
+		      		var latitude = $('[data-js-latitude-input]').val();
+		      		var longitude = $('[data-js-longitude-input]').val();
+		      		var description = $('[data-js-description-input]').val();
+		      		var marker = createMarkerForTheMap(map,latitude,longitude);
+		      	
+		      		addMarkerToModel({
+		      			latitude: latitude,
+		      			longitude: longitude,
+		      			description: description,
+		      			marker: marker
+		      		});
+
+		      	console.log(markers);
+		      });
+
+		
+		  </script>
+
+		  <script>
+				  $(function() {
+				    $( "#slider-range-max" ).slider({
+				      range: "max",
+				      min: 1,
+				      max: 10,
+				      value: 2,
+				      slide: function( event, ui ) {
+				        $( "#amount" ).val( ui.value );
+				      }
+				    });
+				    $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+				  });
+		  </script>
+
+		    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJn2vaCYXkEMmo6CF7zlv05aHeYJfwLuM&callback=initMap"
+		    async defer>  </script>
+
+
+	</body>
+	</html>
