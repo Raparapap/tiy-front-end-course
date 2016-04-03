@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Prototype</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <script id="box-template" type="text/x-handlebars-template">
+  	<div data-box-id="{{boxId}}" class="panel panel-default info-panel">
+  		<div class="panel heading">
+  			<h3 class="panel-title">Panel title</h3>
+  		</div>
+  		<div class="panel-body">Panel content</div>
+  		<button class="btn btn-default" data-remove-marker-button>Remove Marker</button>
+  	</div>
+	</script>
+
+</head>
+<body>
+<div class="container">
+<h1 >Create your marker</h1>
+<div class="row">
+	<div class="col-xs-12 col-md-6" data-js-box-container>
+		<form>
+		  <div class="form-group">
+		    <label for="latitudeInput">Latitude</label>
+		    <input type="number" class="form-control" id="latitudeInput" placeholder="Latitude" data-js-latitude-input>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="longitudeInput">Longitude</label>
+		    <input type="number" class="form-control" id="longitudeInput" placeholder="Longitude" data-js-longtitude-input>
+		  </div>
+
+		  <button type="submit" class="btn btn-default" id="submit-marker">Create Marker</button>
+		</form>
+	</div>
+
+	<div class="col-xs-12 col-md-6">
+		<div id="map" style=" width: 100%; height: 450px "></div>
+	</div>
+</div>
+</div>
+
+<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script >
+var markers = [];
+	var map;
+	
+
+  function initMap() {
+  	var position = {
+			lat: 52.15,
+			lng: 21.00
+			};
+
+    map = new google.maps.Map(document.getElementById('map'), {
+    center: position,
+    zoom: 1
+    });
+      
+    var marker = new google.maps.Marker({
+  		position: position,
+  		map: map,
+		});
+	}
+
+	function generateIdForMarkers(lat, lng) {
+		return lat.toString() + lng.toString();	
+	}
+
+	function removeMarkerFromModel(lat, lng) {
+		for (var i =0; i > markers.length; i++) {
+			if (markers[i].latLng.lat() === lat && markers[i].latLng.lng() === lng ) {
+	  			markers.splice(iterator, 1);  			
+	  		}
+	  	}
+	  }
+
+	function getMarkerFromModel(lat, lng) {
+		for (var i =0; i < markers.length; i++) {
+			if (markers[i].position.lat() === lat && markers[i].position.lng() === lng ) {
+	  			return markers[i];
+	  		} 
+	  	}
+	  	return null;
+	  }
+
+	  function removeMarkerFromMap(lat, lng) {
+	  	getMarkerFromModel(lat, lng).setMap(null);
+	  }
+
+	  function createBox(latitude, longtitude) {
+	  	var boxId = generateIdForMarkers(latitude, longtitude);
+			var source = $('#box-template').html();
+			var template = Handlebars.compile(source);
+			var context = {
+				boxId: boxId
+			};
+
+			var html = template(context);
+			$('form').after(html);
+	  }
+
+	  function removeBox(boxId) {
+	  	$('[data-box-id="' + boxId + '"]').remove();
+	  }
+
+	  function createMarker(latitude, longtitude, map) {
+	  	var marker = new google.maps.Marker({
+				position: {
+		  		lat: parseFloat(latitude),
+		  		lng: parseFloat(longtitude)
+		  	},
+		  	map:map
+
+		  });
+
+			marker.addListener('click', function handleMarkerClick(event){
+				var lat = event.latLng.lat(); 
+				var lng = event.latLng.lng();
+				var boxId = generateIdForMarkers(lat, lng);
+				removeMarkerFromModel(lat, lng);
+				removeMarkerFromMap(lat, lng);
+				removeBox(boxId);
+			});	
+
+			return marker;
+	  }
+
+	  $('[data-js-box-container]').on('click', function handleRemoveMarkerButtonClick(event) {
+
+	  	removeMarkerFromModel(lat, lng); //fix it!!!!
+			removeMarkerFromMap(lat, lng);
+			removeBox(boxId);
+	  });
+
+	  var $createMarkerButton = $('[id="submit-marker"]');
+		$createMarkerButton.on('click', function handleCreateMarkerButtonClick(event) {
+			event.preventDefault();
+
+			var latitude = $('[data-js-latitude-input]').val();
+			var longtitude = $('[data-js-longtitude-input]').val();
+
+			if (!latitude || !longtitude) {
+				return; //stops the handleCreateMarkerButtonClick from executing
+			}
+
+			createBox(latitude, longtitude);
+
+			var marker = createMarker(latitude, longtitude, map);
+			var markerData = {
+				id: generateIdForMarkers(latitude, longtitude),
+				latitude: latitude,
+				longtitude: longtitude,
+				marker: marker
+			};
+
+
+			markers.push(markerData);
+		
+					
+	});
+
+console.log(markers);
+
+//https://repl.it/CASp/1
+//https://repl.it/CAgN/0
+  </script>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-ZhO-a6UjxRv5YmUbP-v3Ra9ZF9ysFAs&callback=initMap"
+    async defer></script>
+</body>
+</html>
