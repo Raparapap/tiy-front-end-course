@@ -1,0 +1,14 @@
+.map {
+      width: 100%;
+      height: 350px;
+      margin-top: 20px;
+    }
+
+.create-button{
+	margin-top: 20px;
+}
+
+.panelB{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}

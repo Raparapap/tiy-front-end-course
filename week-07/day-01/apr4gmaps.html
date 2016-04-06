@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Map</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .map {
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+
+<script id="box-template" type="text/x-handlebars-template">
+  <div data-box-id="{{boxId}}" class="panel panel-default info-panel">
+  <div class="panel heading">
+      <h3 class="panel-title">Panel title</h3>
+    </div>
+    <div class="panel-body">Panel content</div>
+    <button class="btn btn-default" data-remove-marker-button>Remove Marker</button>
+  </div>
+</script>
+
+</head>
+<body>
+<h3> Create markers </h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        
+        <form>
+
+          <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input type="number" class="form-control" id="latitude" placeholder="Type your latitude" required data-js-latitude-input>
+          </div>
+
+          <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input type="number" class="form-control" id="longitude" placeholder="Type your longitude" required data-js-longitude-input>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" rows="5" id="description" data-js-description></textarea>
+          </div>
+
+
+
+          <button type="submit" class="btn btn-default">Create Marker</button>
+
+        </form>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  Dropdown
+  <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">0</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">6</a></li>
+    <li><a href="#">7</a></li>
+    <li><a href="#">8</a></li>
+    <li><a href="#">9</a></li>
+    <li><a href="#">10</a></li>
+  </ul>
+</div>
+
+      </div>
+      <div class="col-sm-6">
+        <p>
+          <label for="rating">Rating range :</label>
+          <input type="text" id="rating" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-range"></div>
+        <br></br>
+        <div data-js-map class="map"></div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+<!-- /// Functions dealing with Data Model already exported to a .js file /// --> 
+
+<script src="./model.js"></script>
+
+<!-- /// Functions dealing with Ui Model already exported to a .js file /// --> 
+
+<script src=./view.js></script>
+
+<!-- /// Functions dealing with both Data Model and User Interface /// -->
+<script src=./controller.js></script>
+
+<!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ --><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbrNuw5MmLjPe3qSkFQkd90g9Y-rj2tZQ&callback=Controller.inIt" async defer></script>
+</body>
+</html>

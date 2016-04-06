@@ -63,7 +63,13 @@
 				<div class="col-xs-12 col-md-6">  
 
 					<div class="map" data-js-map> </div>
-					<div id="slider-range-max"></div>
+
+					<label for="rating">Filter out the markers on the map by ratings:</label>
+  					<input type="text" id="rating" readonly style="border:0; color:red; font-weight:bold;">
+
+
+			
+					<div id="slider-range-max" data-js-slider></div>
 
 				</div>
 			</div>
@@ -141,14 +147,14 @@
 				  $(function() {
 				    $( "#slider-range-max" ).slider({
 				      range: "max",
-				      min: 1,
+				      min: 0,
 				      max: 10,
-				      value: 2,
+				      value: 0,
 				      slide: function( event, ui ) {
-				        $( "#amount" ).val( ui.value );
+				        $( "#rating" ).val( ui.value );
 				      }
 				    });
-				    $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+				    $( "#rating" ).val( $( "#slider-range-max" ).slider( "value" ) );
 				  });
 		  </script>
 
