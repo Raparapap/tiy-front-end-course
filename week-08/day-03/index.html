@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+<section data-js-react-app>
+
+	<div class="mainPhoto" data-js-react-mainWrapper>
+		
+	</div>
+
+	<div class="thumbNails" data-js-react-thumbnails>
+		
+	</div>
+
+</section>
+
+<script src="https://fb.me/react-0.14.2.js"></script>
+<script src="https://fb.me/react-dom-0.14.2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+<script type="text/babel">
+
+var Thumbnail = React.createClass({
+	render: function () {
+	return <div className={'thumbnail-' + this.props.counter}>{'Thumbnail' + this.props.counter}</div>
+	}
+})
+	
+var ReactClassMainPhoto = React.createClass({
+  render: function () {
+    return <section class="container">
+    	   <div className="mainImage">
+	    	<div className="main-Photo"> Main Photo </div>
+	       </div>
+
+	       <div className="thumbnails">
+	       	<Thumbnail counter="1" />
+	       	<Thumbnail counter="2" />
+	       	<Thumbnail counter="3" />
+	       	<Thumbnail counter="4" />
+	       </div>
+	</section>;
+
+  }
+});
+
+var parentElement = document.querySelector('[data-js-react-mainWrapper]');
+var reactComponent = ReactDOM.render(<ReactClassMainPhoto />, parentElement);
+
+
+
+
+</script>
+
+
+</body>
+</html>
