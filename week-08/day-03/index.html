@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
@@ -24,6 +26,22 @@
 
 <script type="text/babel">
 
+var NextButton = React.createClass({
+	render: function () {
+		return <div className="button"> 
+		<button> {'>'} </button> 
+		</div>
+	}
+});
+
+var PreviousButton = React.createClass({
+	render: function () {
+		return <div className="button">
+		 <button> {'<'}  </button>
+		 </div>
+	}
+});
+
 var Thumbnail = React.createClass({
 	getInitialState: function () {
 		return {
@@ -32,33 +50,45 @@ var Thumbnail = React.createClass({
 	},
 
 	handleClick: function () {
+	this.props.handleClick(this.props.counter)
 		this.setState({
-		isSelected: !this.state.isSelected 
+			isSelected: !this.state.isSelected 
 		});
 	},
 
 	render: function () {
-		if (this.state.isSelected) {
-			return <div className='thumbnail selected' onClick={this.handleClick}>{'Thumbnail' + this.props.counter}</div> 
-		} 
-	
-		return <div className='thumbnail' onClick={this.handleClick}>{'Thumbnail' + this.props.counter}</div> 
+		return <div className={'thumbnail' + (this.state.isSelected ? ' selected' : '')} onClick={this.handleClick}>{'Thumbnail' + this.props.counter}</div> 
 		
 	}
 });
+
 	
 var ReactClassMainPhoto = React.createClass({
-  render: function () {
-    return <section class="container">
+	getInitialState: function () {
+			return {
+				pictureCount: 1
+			};
+		},
+
+	changePicture: function (pictureCount) {
+		this.setState({
+			pictureCount: pictureCount
+		})
+	},
+
+    render: function () {
+    return <section className="container">
     	   <div className="mainImage">
-	    	<div className="main-Photo"> Main Photo </div>
+    	 	<PreviousButton />
+	    	<div className="main-Photo"> {this.state.pictureCount} </div>
+	    	<NextButton />
 	       </div>
 
 	       <div className="thumbnails">
-	       	<Thumbnail counter="1" />
-	       	<Thumbnail counter="2" />
-	       	<Thumbnail counter="3" />
-	       	<Thumbnail counter="4" />
+	       	<Thumbnail counter="1" handleClick={this.changePicture}/>
+	       	<Thumbnail counter="2" handleClick={this.changePicture}/>
+	       	<Thumbnail counter="3" handleClick={this.changePicture}/>
+	       	<Thumbnail counter="4" handleClick={this.changePicture}/>
 	       </div>
 	</section>;
 
