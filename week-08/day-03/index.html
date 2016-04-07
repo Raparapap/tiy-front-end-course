@@ -26,22 +26,6 @@
 
 <script type="text/babel">
 
-var NextButton = React.createClass({
-	render: function () {
-		return <div className="button"> 
-		<button> {'>'} </button> 
-		</div>
-	}
-});
-
-var PreviousButton = React.createClass({
-	render: function () {
-		return <div className="button">
-		 <button> {'<'}  </button>
-		 </div>
-	}
-});
-
 var Thumbnail = React.createClass({
 	getInitialState: function () {
 		return {
@@ -70,6 +54,14 @@ var ReactClassMainPhoto = React.createClass({
 			};
 		},
 
+	changePictureToPrevious: function () {
+
+	},
+
+	changePictureToNext: function () {
+
+	},
+
 	changePicture: function (pictureCount) {
 		this.setState({
 			pictureCount: pictureCount
@@ -79,9 +71,9 @@ var ReactClassMainPhoto = React.createClass({
     render: function () {
     return <section className="container">
     	   <div className="mainImage">
-    	 	<PreviousButton />
+    	 	<Button direction='left' onClick={this.changePictureToPrevious}/>
 	    	<div className="main-Photo"> {this.state.pictureCount} </div>
-	    	<NextButton />
+	    	<Button direction='right' onClick={this.changePictureToNext}/>
 	       </div>
 
 	       <div className="thumbnails">
