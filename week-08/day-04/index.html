@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My slideshow made with ReactJs</title>
+	<link rel="stylesheet" type="text/css" href="./styles.css"> 
+</head>
+<body>
+
+<section data-js-react-slideshow> </section>
+
+<script src="https://fb.me/react-0.14.2.js"></script>
+<script src="https://fb.me/react-dom-0.14.2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+
+
+<script type="text/babel">
+	
+var images = ['./images/image-01.jpg', './images/image-02.jpg', './images/image-03.jpg', './images/image-04.jpg' ]
+
+var MainImage = React.createClass({
+	
+	render : function () {
+		return ( 
+		<img src="" className="mainPhoto"/>
+		)
+	}
+});
+
+var Button = React.createClass({
+	handleClick: function () {
+		this.props.onClick
+	},
+
+	render : function () {
+		return (
+		<button className={this.props.direction} onClick={this.handleClick}> </button>)
+	}
+});
+
+var Thumbnail = React.createClass({
+	handleClick : function () {
+		this.props.onClick
+	},
+	render : function () {
+		return (
+		<img src={this.props.source} className='mini' onClick={this.handleClick}/>
+		)
+	}
+});
+
+var SlideShow = React.createClass({
+	getInitialState : function () {
+		return {
+			currentImage: 1,
+			currentThumbnail: 1
+		}
+	},
+
+	changePictureToNext : function() {
+
+	},
+
+	changePictureToPrevious : function () {
+
+	},
+
+	changePicture : function () {
+
+	},
+
+	render : function () {
+		return (
+		<div className="SlideShowProper">
+			<div className="mainPhotoWithButtons">
+				<Button direction="left" onClick={this.changePictureToPrevious}/>
+				<MainImage />
+				<Button direction="right" onClick={this.changePictureToNext}/>
+			</div>
+
+			<div className="miniThumbnails">
+				<div className="thumbnail"> <Thumbnail counter="1" onClick={this.changePicture} source={images[0]}/> </div>
+				<div className="thumbnail"> <Thumbnail counter="2" onClick={this.changePicture} source={images[1]}/> </div>
+				<div className="thumbnail"> <Thumbnail counter="3" onClick={this.changePicture} source={images[2]}/> </div>
+				<div className="thumbnail"> <Thumbnail counter="4" onClick={this.changePicture} source={images[3]}/> </div>
+			</div>	
+		</div>
+		
+		)
+	}
+});
+
+var parentElement = document.querySelector('[data-js-react-slideshow]')
+ReactDOM.render(<SlideShow />, parentElement); 
+
+
+</script>
+</body>
+</html>

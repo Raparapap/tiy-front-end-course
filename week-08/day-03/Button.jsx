@@ -1,3 +1,4 @@
+
 var Button = React.createClass({
 	handleClick: function () {
 	this.props.changePicture

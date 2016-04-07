@@ -20,11 +20,61 @@
 
 </section>
 
-<script src="https://fb.me/react-0.14.2.js"></script>
-<script src="https://fb.me/react-dom-0.14.2.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+v
+
+
+<script type="text/javascript">
+	var images = [{./images/image-01.jpg}, {./images/image-02.jpg}, {./images/image-03.jpg}, {./images/image-04.jpg}]
+</script>
 
 <script type="text/babel">
+
+var Button = React.createClass({
+	handleClick: function () {
+	this.props.changePicture
+	},
+	render: function () {
+		return <div> 
+		<button className={this.props.direction} onClick={this.handleClick}> </button> 
+		</div>
+	}
+});
+
+var Image = React.createClass({
+	getInitialState: function () {
+		return {
+		 currentImage: 1
+		}
+	},
+	changePictureToNext: function () {
+		var nextImage;
+		if(this.state.currentImage === IMAGES.length) {
+			nextImage = 1;
+		} else {
+		 nextImage = this.state.currentImage + 1
+		}
+		this.setState({
+			currentImage: nextImage
+		})
+	},
+
+	render: function () {
+		return (
+		<section>
+		<img src={IMAGES[this.state.currentImage -1]} />
+		<Button direction="right" onClick={this.changePictureToNext} />
+		<Button direction="left " onClick={this.changePictureToPrevious} />
+		<div>
+			<Thumbnail counter="1" onClick={this.changePicture} />
+			<Thumbnail counter="2" onClick={this.changePicture} />
+			<Thumbnail counter="3" onClick={this.changePicture} />
+			<Thumbnail counter="4" onClick={this.changePicture} />
+		</div>
+		</section>
+		)
+	}
+})
+
 
 var Thumbnail = React.createClass({
 	getInitialState: function () {
