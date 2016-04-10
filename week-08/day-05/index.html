@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React.js</title>
+</head>
+<body>
+
+  <div data-react-app></div>
+
+  <script src="https://fb.me/react-15.0.0.js"></script>
+  <script src="https://fb.me/react-dom-15.0.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script type="text/babel">
+
+    var ListItem = React.createClass({
+      handleClick: function () {
+        var modelName = this.props.model;
+        this.props.onClick(modelName);
+      },
+
+      render: function () {
+        return <li>{this.props.model} <button onClick={this.handleClick}>Remove</button></li>;
+      }
+    });
+
+    var TeslaCars = React.createClass({
+
+      getInitialState: function () {
+        return {
+          models: ['Model S', 'Model X', 'Model 3', 'Model X']
+        };
+      },
+
+      removeModel: function (modelName) {
+        var indexForModelName = this.state.models.indexOf(modelName);
+        this.state.models.splice(indexForModelName, 1);
+
+        this.setState({
+          models: this.state.models
+        });
+      },
+
+      /*
+
+      [<li>Model S</li>, <li>Model X</li>, <li>Model 3</li>]
+
+      */
+
+      getListItems: function () {
+        return this.state.models.map(function createElement(modelName, index) {
+          return <ListItem key={index} model={modelName} onClick={this.removeModel} />;
+
+          //return <li key={index}>{modelName}</li>;
+        }.bind(this));
+      },
+
+      render: function () {
+
+        var listOfTeslaCars = <ul>{this.getListItems()}</ul>;
+
+        return listOfTeslaCars;
+      }
+    });
+
+    var parentElement = document.querySelector('[data-react-app]');
+
+    ReactDOM.render(<TeslaCars />, parentElement);
+
+  </script>
+</body>
+</html>

@@ -8,21 +8,21 @@
 
 <section data-js-react-slideshow> </section>
 
-<script src="https://fb.me/react-0.14.2.js"></script>
-<script src="https://fb.me/react-dom-0.14.2.js"></script>
+<script src="https://fb.me/react-15.0.0.min.js"></script>
+<script src="https://fb.me/react-dom-15.0.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 
 
 
 <script type="text/babel">
 	
-var images = ['./images/image-01.jpg', './images/image-02.jpg', './images/image-03.jpg', './images/image-04.jpg' ]
+var images = ['./images/image-01.jpg', './images/image-02.jpg', './images/image-03.jpg', './images/image-04.jpg' ];
 
 var MainImage = React.createClass({
 	
 	render : function () {
 		return ( 
-		<img src="" className="mainPhoto"/>
+		<img src={this.props.source} className="mainPhoto"/>
 		)
 	}
 });
@@ -34,7 +34,7 @@ var Button = React.createClass({
 
 	render : function () {
 		return (
-		<button className={this.props.direction} onClick={this.handleClick}> </button>)
+		<button className={this.props.direction} onClick={this.handleClick}> {this.props.direction} </button>)
 	}
 });
 
@@ -52,17 +52,33 @@ var Thumbnail = React.createClass({
 var SlideShow = React.createClass({
 	getInitialState : function () {
 		return {
-			currentImage: 1,
-			currentThumbnail: 1
+			currentImage: 0,
+			currentThumbnail: 0
 		}
 	},
 
 	changePictureToNext : function() {
-
+		var nextImage;
+		if(this.state.currentImage === images.length) {
+			nextImage = 0;
+		} else {
+		 nextImage = this.state.currentImage + 1
+		}
+		this.setState({
+			currentImage: nextImage
+		})
 	},
 
 	changePictureToPrevious : function () {
-
+		var previousImage;
+		if(this.state.currentImage === images[0]) {
+			previousImage = images.length;
+		} else {
+		  previousImage = this.state.currentImage - 1
+		}
+		this.setState({
+			currentImage: previousImage
+		})
 	},
 
 	changePicture : function () {
@@ -74,7 +90,7 @@ var SlideShow = React.createClass({
 		<div className="SlideShowProper">
 			<div className="mainPhotoWithButtons">
 				<Button direction="left" onClick={this.changePictureToPrevious}/>
-				<MainImage />
+				<MainImage source={images[this.state.currentImage]}/>
 				<Button direction="right" onClick={this.changePictureToNext}/>
 			</div>
 
