@@ -40,12 +40,6 @@
         });
       },
 
-      /*
-
-      [<li>Model S</li>, <li>Model X</li>, <li>Model 3</li>]
-
-      */
-
       getListItems: function () {
         return this.state.models.map(function createElement(modelName, index) {
           return <ListItem key={index} model={modelName} onClick={this.removeModel} />;
